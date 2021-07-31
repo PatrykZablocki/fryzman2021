@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { H2 } from '../reusable/Headings'
 
+import PriceList from './PriceList'
+
 const StyledSection = styled.section`
     position: relative;
     background-color: ${({theme}) => theme.colors.orange};
@@ -26,66 +28,12 @@ const StyledH2 = styled(H2)`
     }
 `
 
-const Items = styled.div`
-    padding: 0 20px;
-    width: 100%;
-    max-width: 800px;
-    display: grid;
-    row-gap: 12px;
-
-    @media screen and (min-width: ${({theme}) => theme.desktopWidth}){
-        row-gap: 25px;
-    }
-`
-
-const Item = styled.div`
-    font-size: 16px;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px dashed ${({theme}) => theme.colors.white};
-
-    @media screen and (min-width: ${({theme}) => theme.desktopWidth}){
-        padding: 10px;
-    }
-`
-
-const ServicePrice = styled.span`
-    font-weight: 700;
-`
-
 
 const PriceListSection = () => {
     return (
         <StyledSection className='price-list'>
             <StyledH2 boldText="Cennik"></StyledH2>
-            <Items className="items">
-                <Item>
-                    Strzyżenie włosów
-                    <ServicePrice>40zł</ServicePrice>
-                </Item>
-                <Item>
-                    Strzyżenie włosów (do lat 15)
-                    <ServicePrice>35zł</ServicePrice>
-                </Item>
-                <Item>
-                    Strzyżenie włosów (ojciec + syn)
-                    <ServicePrice>70zł</ServicePrice>
-                </Item>
-                <Item>
-                    Golenie głowy brzytwą
-                    <ServicePrice>40zł</ServicePrice>
-                </Item>
-                <Item>
-                    Golenie twarzy brzytwą
-                    <ServicePrice>25zł</ServicePrice>
-                </Item>
-                <Item>
-                    Strzyżenie brody
-                    <ServicePrice>30zł</ServicePrice>
-                </Item>
-            </Items>
+            <PriceList className='items' />
         </StyledSection>
     )
 }
