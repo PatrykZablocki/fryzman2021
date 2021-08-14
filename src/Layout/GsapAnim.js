@@ -12,8 +12,7 @@ const GsapAnim = () => {
         //
         //HeroSection/HeroImage
         //
-        gsap.timeline({
-        })
+        gsap.timeline()
             .from('.heroCircleBg', { scale: 0, duration: .5, delay: .6, ease: 'back' })
             .from('.heroImg', { opacity: 0, y: -10, duration: 1, })
             .from('.circle', { opacity: 0, duration: 1, stagger: .5 })
@@ -33,12 +32,14 @@ const GsapAnim = () => {
 
 
         //
-        //DESKTOP ONLY
+        // MATCH MEDIA
         //
+        const heroTimeline = gsap.timeline()
         ScrollTrigger.matchMedia({'(min-width: 960px)': () => {
 
             //hero section
-            gsap.timeline()
+            ScrollTrigger.saveStyles('.hero-background, .hero-text h1, .hero-text h2, .hero-serivces > *, .nav')
+            heroTimeline
                 .from('.hero-background', { yPercent: '-100', duration: 1.2 })
                 .from('.hero-text h1', { opacity: 0, duration: .5 })
                 .from('.hero-text h2', { opacity: 0, x: '-50', duration: .5}, "<+=.2")
@@ -47,6 +48,7 @@ const GsapAnim = () => {
 
 
             //InfoSection/AddressBlock
+            ScrollTrigger.saveStyles('.address-text, .phone-container > :is(h2, h3)')
             gsap.from('.address-text', {
                 scrollTrigger: {
                     trigger: '.address-text',
@@ -69,6 +71,7 @@ const GsapAnim = () => {
             })
 
             //InfoSection/OpeningHoursBlock
+            ScrollTrigger.saveStyles('.opening-hours h2, .opening-hours .items > *')
             gsap.timeline({scrollTrigger: {
                 trigger: '.opening-hours h2',
                 start: 'top 80%',
@@ -82,6 +85,7 @@ const GsapAnim = () => {
                 })
 
             //PriceListSection
+            ScrollTrigger.saveStyles('.price-list h2, .price-list .items > *')
             gsap.timeline({scrollTrigger: {
                 trigger: '.price-list .items',
                 start: 'top 90%'
@@ -94,6 +98,7 @@ const GsapAnim = () => {
                 }, .2)
 
             //footer
+            ScrollTrigger.saveStyles('footer > *')
             gsap.from('footer > *', {
                 scrollTrigger: {
                     trigger: 'footer',
@@ -104,8 +109,10 @@ const GsapAnim = () => {
                 y: '200',
             })
 
-        }})
-
+        }, '(max-width: 959.9px)': () => {
+            heroTimeline.isActive() && heroTimeline.progress(1)
+        }
+    })
 
     })
     return <></>
